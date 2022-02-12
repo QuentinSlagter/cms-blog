@@ -1,6 +1,17 @@
 <?php ob_start(); ?>
+<?php session_start(); ?>
 <?php include "../includes/db.php"; ?>
 <?php include "functions.php"; ?>
+
+<?php 
+
+// Stopping Users that are Not Admin from logging in
+if(!isset($_SESSION['user_role'])) {
+    header("Location: ../index.php");
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +25,8 @@
     <meta name="author" content="">
 
     <title>SB Admin - Bootstrap Admin Template</title>
+    <!-- Google Chart for Dashboard -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

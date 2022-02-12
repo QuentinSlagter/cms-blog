@@ -85,9 +85,23 @@
     <label for="post_author">Post Author</label>
     <input class="form-control" value="<?php echo $post_author; ?>" type="text" name="post_author">
   </div>
+  <label for="post_status">Post Status</label>
   <div class="form-group">
-    <label for="post_status">Post Status</label>
-    <input class="form-control" value="<?php echo $post_status; ?>" type="text" name="post_status">
+    <select name="post_status" id="">
+    
+    <option value="<?php echo $post_status ?>"><?php echo $post_status ?></option>
+      
+      <!-- Changing the Post Status on the Edit Post Page -->
+      <?php 
+      
+      if($post_status == 'published') {
+        echo "<option value='draft'>draft</option>";
+      } else {
+        echo "<option value='published'>published</option>";
+      }
+
+      ?>
+    </select>
   </div>
   <label for="post_image">Post Image</label>
   <div class="form-group">

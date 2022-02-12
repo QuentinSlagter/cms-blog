@@ -1,9 +1,9 @@
 <?php 
 
-$db['db_host'] = "127.0.0.1";
-$db['db_user'] = "root";
-$db['db_pass'] = "";
-$db['db_name'] = "cms";
+$db['db_host'] = "us-cdbr-east-05.cleardb.net";
+$db['db_user'] = "bb745881e4fa9b";
+$db['db_pass'] = "4bf41795";
+$db['db_name'] = "heroku_702abdf7086fecd";
 
 foreach($db as $key => $value) {
   define(strtoupper($key), $value);

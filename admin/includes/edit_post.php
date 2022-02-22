@@ -50,6 +50,9 @@
     $update_post_query = mysqli_query($connection, $query);
 
     confirm_query($update_post_query);
+
+    // Allowing user to see the post was updated and to allow them to navigate to that post or continue editing other posts
+    echo "<p class='bg-success'>Post Updated! <a href='../post.php?p_id={$editing_post_id}'>View Post</a> or <a href='posts.php'>Edit Other Posts</a></p>";
   }
 
 ?>
@@ -114,10 +117,9 @@
     <input class="form-control" value="<?php echo $post_tags; ?>" type="text" name="post_tags">
   </div>
   <div class="form-group">
-    <label for="post_content">Post Content</label>
-    <textarea class="form-control" name="post_content" cols="30" rows="10">
-    <?php echo $post_content; ?>
-    </textarea>
+    <label for="summernote">Post Content</label>
+    <!-- Be careful to not leave any spaces on the textarea, otherwise it will save additional unwanted spaces -->
+    <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10"><?php echo $post_content; ?></textarea>
   </div>
   <div class="form-group">
     <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">

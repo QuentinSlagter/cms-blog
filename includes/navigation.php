@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Quentin's Blog</a>
+                <a class="navbar-brand" href="index.php">Power of Programming</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -29,6 +29,18 @@
                     <li>
                         <a href="/admin/admin_index.php">Admin</a>
                     </li>
+        
+                <?php 
+                // check the Admin Session Login 
+                if (isset($_SESSION['user_role'])) {
+                    // check the post page
+                    if (isset($_GET['p_id'])) {
+                        $the_post_id = $_GET['p_id'];
+                        echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                    }
+                }
+                
+                ?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

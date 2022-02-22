@@ -33,6 +33,8 @@ if(isset($_POST['update_user'])) {
   $update_user_query = mysqli_query($connection, $query);
 
   confirm_query($update_user_query);
+
+  echo "<p class='bg-success'>User Updated: " . " " . "<a href='users.php'>View Users</a></p>";
 }
 
 ?>

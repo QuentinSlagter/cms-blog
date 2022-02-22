@@ -24,7 +24,7 @@ if(!isset($_SESSION['user_role'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>P.O.P Admin</title>
     <!-- Google Chart for Dashboard -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 

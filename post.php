@@ -59,11 +59,14 @@
             <?php 
             
             if(isset($_POST['create_comment'])) {
-                $displaying_full_post_with_id = $_GET['p_id'];
 
+                $displaying_full_post_with_id = $_GET['p_id'];
                 $comment_author = $_POST['comment_author'];
                 $comment_email = $_POST['comment_email'];
                 $comment_content = $_POST['comment_content'];
+
+                // Alerting user that fields cannot be blank
+                if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
                 $query = "INSERT INTO comments(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) VALUES($displaying_full_post_with_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
 
@@ -75,7 +78,12 @@
                 $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = {$displaying_full_post_with_id} ";
 
                 $update_comment_count = mysqli_query($connection, $query);
-            }
+                    } else {
+                        echo "<script>alert('Fields cannot be empty')</script>";
+                    }
+                    // Allowing user to see the post was updated and to allow them to navigate to that post or continue editing other posts
+                    echo "<p class='bg-success'>Comment Submitted! The comment will be displayed after being reviewed by admin</p>";
+                }
 
             ?>
 
@@ -114,7 +122,7 @@
                 $query = "SELECT * FROM comments WHERE comment_post_id = {$p_id} AND comment_status = 'approved' ORDER BY comment_id DESC ";
                 $select_comment_query = mysqli_query($connection,$query);
                 if(!$select_comment_query) {
-                    die('Query Failed' . myslqi_error($connection));   
+                    die('Query Failed' . mysqli_error($connection));   
                 }
 
                 while($row = mysqli_fetch_array($select_comment_query)) {

@@ -23,7 +23,10 @@ if(isset($_POST['create_post'])) {
 
   confirm_query($create_post_query);
 
-  echo "Post Created: " . " " . "<a href='posts.php'>View Posts</a>";
+  // echo "Post Created: " . " " . "<a href='posts.php'>View Posts</a>";
+
+  // Allowing user to see the post was created and to allow them to navigate to that post or view all other posts
+  echo "<p class='bg-success'>Post Created! <a href='../post.php?p_id={$post_id}'>View Post</a> or <a href='posts.php'>View All Posts</a></p>";
 }
 
 ?>

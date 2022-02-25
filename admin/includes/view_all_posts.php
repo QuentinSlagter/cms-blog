@@ -16,6 +16,25 @@ if(isset($_POST['checkBoxArray'])) {
         $update_to_draft_status = mysqli_query($connection, $query);
         confirm_query($update_to_draft_status);
         break;
+      case 'clone':
+        $query = "SELECT * FROM posts WHERE post_id = '{$postValueId}'";
+        $select_post_query = mysqli_query($connection, $query);
+        while($row = mysqli_fetch_array($select_post_query)) {
+          $post_title = $row['post_title'];
+          $post_category_id = $row['post_category_id'];
+          $post_date = $row['post_date'];
+          $post_author = $row['post_author'];
+          $post_status = $row['post_status'];
+          $post_image = $row['post_image'];
+          $post_tags = $row['post_tags'];
+          $post_content = $row['post_content'];
+        }
+
+        $query = "INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_status) VALUES($post_category_id,'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}' ) ";
+        $copy_query = mysqli_query($connection, $query);
+
+        confirm_query($select_post_query);
+        break;
       case 'delete':
         $query = "DELETE FROM posts WHERE post_id = '{$postValueId}'";
         $update_to_delete_status = mysqli_query($connection, $query);
@@ -36,6 +55,7 @@ if(isset($_POST['checkBoxArray'])) {
       <option value="">Select Options</option>
       <option value="published">Publish</option>
       <option value="draft">Draft</option>
+      <option value="clone">Clone</option>
       <option value="delete">Delete</option>
     </select>
 
@@ -46,7 +66,7 @@ if(isset($_POST['checkBoxArray'])) {
     <a class="btn btn-primary" href="posts.php?source=add_post">Add New</a>
   </div>
 
-  <br>
+  <br><br>
 
   <thead>
     <tr>
@@ -70,7 +90,7 @@ if(isset($_POST['checkBoxArray'])) {
 <!-- Collect and Display All Posts in a Table -->
 <?php 
 
-$query = "SELECT * FROM posts" ;
+$query = "SELECT * FROM posts ORDER BY post_id DESC" ;
 $select_posts = mysqli_query($connection,$query);
 
 while($row = mysqli_fetch_assoc($select_posts)) {
@@ -87,7 +107,7 @@ while($row = mysqli_fetch_assoc($select_posts)) {
 echo "<tr>";
 ?>
 
-<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>;
+<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
 
 <?php
   echo "<td>$post_id</td>";

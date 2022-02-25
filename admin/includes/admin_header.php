@@ -46,8 +46,14 @@ if(!isset($_SESSION['user_role'])) {
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
 
+    <link href="/admin/css/styles.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/admin/css/summernote.css">
 
 </head>
 
 <body>
+    <div id='load-screen'>
+        <div id='loading'>
+        </div>
+    </div>

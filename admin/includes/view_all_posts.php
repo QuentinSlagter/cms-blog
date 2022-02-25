@@ -78,6 +78,7 @@ if(isset($_POST['checkBoxArray'])) {
       <th>Status</th>
       <th>Image</th>
       <th>Tags</th>
+      <th>Views</th>
       <th>Comments</th>
       <th>Date</th>
       <th>Link</th>
@@ -103,6 +104,7 @@ while($row = mysqli_fetch_assoc($select_posts)) {
   $post_tags = $row['post_tags'];
   $post_comment_count = $row['post_comment_count'];
   $post_date = $row['post_date'];
+  $post_views_count = $row['post_views_count'];
 
 echo "<tr>";
 ?>
@@ -128,6 +130,7 @@ echo "<tr>";
   echo "<td>$post_status</td>";
   echo "<td><img class='img-responsive' width='100' src='../images/$post_image' alt='image'>$post_image</td>";
   echo "<td>$post_tags</td>";
+  echo "<td>$post_views_count</td>";
   echo "<td>$post_comment_count</td>";
   echo "<td>$post_date</td>";
   echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";

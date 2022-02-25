@@ -19,6 +19,7 @@
     $post_tags = $row['post_tags'];
     $post_comment_count = $row['post_comment_count'];
     $post_date = $row['post_date'];
+    $post_views_count = $row['post_views_count'];
   }
 
   if(isset($_POST['update_post'])) {
@@ -50,6 +51,9 @@
     $update_post_query = mysqli_query($connection, $query);
 
     confirm_query($update_post_query);
+
+    // $reset_views_query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$editing_post_id}";
+    // $update_views_query = mysqli_query($connection, $update_views_query);
 
     // Allowing user to see the post was updated and to allow them to navigate to that post or continue editing other posts
     echo "<p class='bg-success'>Post Updated! <a href='../post.php?p_id={$editing_post_id}'>View Post</a> or <a href='posts.php'>Edit Other Posts</a></p>";
@@ -115,6 +119,22 @@
   <div class="form-group">
     <label for="post_tags">Post Tags</label>
     <input class="form-control" value="<?php echo $post_tags; ?>" type="text" name="post_tags">
+  </div>
+  <div class="form-group">
+    <label for="post_views_count">Current Post Views: <?php echo $post_views_count; ?></label>
+    <br>
+    <!-- Button that requires confirmation before resetting views on a post and then updating it in the databse -->
+    <?php echo "<button name='resetButton' onClick=\"javascript: return confirm('Are you sure you want to reset the views'); \" >Reset View Count</button>";
+
+    if(isset($_POST['resetButton'])) {
+
+    $reset_views_query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$editing_post_id}";
+    $update_views_query = mysqli_query($connection, $reset_views_query);
+
+    // Reload the current URL, so the user sees the updated view count
+    header("Refresh:0");
+    }
+    ?>
   </div>
   <div class="form-group">
     <label for="summernote">Post Content</label>

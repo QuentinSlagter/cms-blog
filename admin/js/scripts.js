@@ -17,4 +17,9 @@ $(document).ready(function() {
       });
     }
   });
+
+  // Adding a loading screen
+  $('#load-screen').delay(700).fadeOut(600, function() {
+    $(this).remove();
+  });
 });

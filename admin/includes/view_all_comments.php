@@ -52,7 +52,8 @@ echo "<tr>";
   echo "<td>$comment_date</td>";
   echo "<td><a href='comments.php?approved={$comment_id}'>Approve</a></td>";
   echo "<td><a href='comments.php?unapproved={$comment_id}'>Unapprove</a></td>";
-  echo "<td><a href='comments.php?delete={$comment_id}'>Delete</a></td>";
+  // Javascript confirmation popup asking user if they are sure they want to delete the item
+  echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='comments.php?delete={$comment_id}'>Delete</a></td>";
 echo "</tr>";
 }
 

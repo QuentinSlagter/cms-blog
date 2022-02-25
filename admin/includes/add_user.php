@@ -16,7 +16,18 @@ if(isset($_POST['create_user'])) {
 
   // move_uploaded_file($post_image_temp, "../images/$post_image");
 
-  $query = "INSERT INTO users(user_firstName,user_lastName,user_role,user_username,user_email,user_password) VALUES('{$user_firstName}','{$user_lastName}','{$user_role}','{$user_username}','{$user_email}','{$user_password}' ) ";
+  // Encrypting passwords in the database that are added in the add user page and showing the password before being encrypted in the password field on that add user page
+  $query = "SELECT randSalt FROM users";
+  $select_randsalt_query = mysqli_query($connection,$query);
+  if(!$select_randsalt_query) {
+    die("Query Failed" . mysqli_error($connection));
+  }
+
+  $row = mysqli_fetch_array($select_randsalt_query);
+  $salt = $row['randSalt'];
+  $hashed_password = crypt($user_password, $salt);
+
+  $query = "INSERT INTO users(user_firstName,user_lastName,user_role,user_username,user_email,user_password) VALUES('{$user_firstName}','{$user_lastName}','{$user_role}','{$user_username}','{$user_email}','{$hashed_password}' ) ";
 
   $create_user_query = mysqli_query($connection, $query);
 

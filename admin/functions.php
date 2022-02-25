@@ -41,7 +41,8 @@ function find_all_categories() {
     echo "<tr>";
     echo "<td>{$cat_id}</td>";
     echo "<td>{$cat_title}</td>";
-    echo "<td><a href='admin_categories.php?delete={$cat_id}'>Delete</a></td>";
+    // Javascript confirmation popup asking user if they are sure they want to delete the item
+    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='admin_categories.php?delete={$cat_id}'>Delete</a></td>";
     echo "<td><a href='admin_categories.php?edit={$cat_id}'>Edit</a></td>";
     echo "</tr>";
     }

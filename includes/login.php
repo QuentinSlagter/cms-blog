@@ -28,6 +28,9 @@ if(isset($_POST['login'])) {
     $db_user_role = $row['user_role'];
   }
 
+  // Reversing the crypt function to recognize the initial password before being encrypted. It compares the orginial password and the encrypted password.
+  $password = crypt($password, $db_user_password);
+
   // Checking if Username and Password are correct to Login into Admin, otherwise it keeps the person on the Index page
   if($username === $db_user_username && $password === $db_user_password) {
     $_SESSION['username'] = $db_user_username;

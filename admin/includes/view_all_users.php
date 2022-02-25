@@ -50,7 +50,8 @@ echo "<tr>";
   echo "<td><a href='users.php?change_to_admin={$user_id}'>Admin</a></td>";
   echo "<td><a href='users.php?change_to_subscriber={$user_id}'>Subscriber</a></td>";
   echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
-  echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
+  // Javascript confirmation popup asking user if they are sure they want to delete the item
+  echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='users.php?delete={$user_id}'>Delete</a></td>";
 echo "</tr>";
 }
 

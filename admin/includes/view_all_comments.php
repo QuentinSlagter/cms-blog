@@ -22,13 +22,13 @@ $query = "SELECT * FROM comments" ;
 $select_comments = mysqli_query($connection,$query);
 
 while($row = mysqli_fetch_assoc($select_comments)) {
-  $comment_id = $row['comment_id'];
-  $comment_post_id = $row['comment_post_id'];
-  $comment_author = $row['comment_author'];
-  $comment_content = $row['comment_content'];
-  $comment_email = $row['comment_email'];
-  $comment_status = $row['comment_status'];
-  $comment_date = $row['comment_date'];
+  $comment_id = escape($row['comment_id']);
+  $comment_post_id = escape($row['comment_post_id']);
+  $comment_author = escape($row['comment_author']);
+  $comment_content = escape($row['comment_content']);
+  $comment_email = escape($row['comment_email']);
+  $comment_status = escape($row['comment_status']);
+  $comment_date = escape($row['comment_date']);
 
 
 echo "<tr>";
@@ -43,8 +43,8 @@ echo "<tr>";
   $select_post_id_query = mysqli_query($connection,$query);
 
   while($row = mysqli_fetch_assoc($select_post_id_query)) {
-    $post_id = $row['post_id'];
-    $post_title = $row['post_title'];
+    $post_id = escape($row['post_id']);
+    $post_title = escape($row['post_title']);
 
     echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
   }
@@ -63,7 +63,7 @@ echo "</tr>";
 
 // Approving Comments added to a Post
 if(isset($_GET['approved'])) {
-  $approve_comment_id = $_GET['approved'];
+  $approve_comment_id = escape($_GET['approved']);
   $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $approve_comment_id ";
   $approve_query = mysqli_query($connection, $query);
   header("Location: comments.php");
@@ -71,7 +71,7 @@ if(isset($_GET['approved'])) {
 
 // Unapproving Comments added to a Post
 if(isset($_GET['unapproved'])) {
-  $unapprove_comment_id = $_GET['unapproved'];
+  $unapprove_comment_id = escape($_GET['unapproved']);
   $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $unapprove_comment_id ";
   $unapprove_query = mysqli_query($connection, $query);
   header("Location: comments.php");
@@ -79,7 +79,7 @@ if(isset($_GET['unapproved'])) {
 
 // Deleting Comments from the View All Comments Table
 if(isset($_GET['delete'])) {
-  $delete_comment_id = $_GET['delete'];
+  $delete_comment_id = escape($_GET['delete']);
   $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id";
   $delete_query = mysqli_query($connection, $query);
   header("Location: comments.php");

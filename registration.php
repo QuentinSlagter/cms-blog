@@ -4,9 +4,9 @@
 <?php 
 
 if(isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = escape($_POST['username']);
+    $email = escape($_POST['email']);
+    $password = escape($_POST['password']);
 
     // Alerting user that fields cannot be blank
     if(!empty($username) && !empty($email) && !empty($password)) {
@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
     $select_randsalt_query = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($select_randsalt_query); 
-    $salt = $row['randSalt'];
+    $salt = escape($row['randSalt']);
 
     $password = crypt($password, $salt);
 

@@ -11,9 +11,9 @@ foreach($db as $key => $value) {
 
 $connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
-// if($connection) {
-//   echo "We are connected";
-// }
-
-
+// Cleaning up data so hackers cannot delete or modify any data
+function escape($string) {
+  global $connection;
+  return mysqli_real_escape_string($connection, trim($string));
+}
 ?>

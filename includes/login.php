@@ -5,8 +5,8 @@
 <?php 
 
 if(isset($_POST['login'])) {
-  $username = $_POST['user_username'];
-  $password = $_POST['user_password'];
+  $username = escape($_POST['user_username']);
+  $password = escape($_POST['user_password']);
 
   // Protecting Input Fields from Hackers
   $username = mysqli_real_escape_string($connection, $username );
@@ -20,12 +20,12 @@ if(isset($_POST['login'])) {
   }
   
   while($row = mysqli_fetch_array($select_user_query)) {
-    $db_id = $row['user_id'];
-    $db_user_username = $row['user_username'];
-    $db_user_password = $row['user_password'];
-    $db_user_firstName = $row['user_firstName'];
-    $db_user_lastName = $row['user_lastName'];
-    $db_user_role = $row['user_role'];
+    $db_id = escape($row['user_id']);
+    $db_user_username = escape($row['user_username']);
+    $db_user_password = escape($row['user_password']);
+    $db_user_firstName = escape($row['user_firstName']);
+    $db_user_lastName = escape($row['user_lastName']);
+    $db_user_role = escape($row['user_role']);
   }
 
   // Reversing the crypt function to recognize the initial password before being encrypted. It compares the orginial password and the encrypted password.

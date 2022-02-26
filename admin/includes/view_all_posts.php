@@ -2,7 +2,7 @@
 
 if(isset($_POST['checkBoxArray'])) {
   foreach($_POST['checkBoxArray'] as $postValueId) {
-    $bulk_options = $_POST['bulk_options'];
+    $bulk_options = escape($_POST['bulk_options']);
 
     // Bulk selecting posts and changing them to published, drafts, or deleting them altogether
     switch($bulk_options) {
@@ -20,14 +20,14 @@ if(isset($_POST['checkBoxArray'])) {
         $query = "SELECT * FROM posts WHERE post_id = '{$postValueId}'";
         $select_post_query = mysqli_query($connection, $query);
         while($row = mysqli_fetch_array($select_post_query)) {
-          $post_title = $row['post_title'];
-          $post_category_id = $row['post_category_id'];
-          $post_date = $row['post_date'];
-          $post_author = $row['post_author'];
-          $post_status = $row['post_status'];
-          $post_image = $row['post_image'];
-          $post_tags = $row['post_tags'];
-          $post_content = $row['post_content'];
+          $post_title = escape($row['post_title']);
+          $post_category_id = escape($row['post_category_id']);
+          $post_date = escape($row['post_date']);
+          $post_author = escape($row['post_author']);
+          $post_status = escape($row['post_status']);
+          $post_image = escape($row['post_image']);
+          $post_tags = escape($row['post_tags']);
+          $post_content = escape($row['post_content']);
         }
 
         $query = "INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_status) VALUES($post_category_id,'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}' ) ";
@@ -95,16 +95,16 @@ $query = "SELECT * FROM posts ORDER BY post_id DESC" ;
 $select_posts = mysqli_query($connection,$query);
 
 while($row = mysqli_fetch_assoc($select_posts)) {
-  $post_id = $row['post_id'];
-  $post_author = $row['post_author'];
-  $post_title = $row['post_title'];
-  $post_category_id = $row['post_category_id'];
-  $post_status = $row['post_status'];
-  $post_image = $row['post_image'];
-  $post_tags = $row['post_tags'];
-  $post_comment_count = $row['post_comment_count'];
-  $post_date = $row['post_date'];
-  $post_views_count = $row['post_views_count'];
+  $post_id = escape($row['post_id']);
+  $post_author = escape($row['post_author']);
+  $post_title = escape($row['post_title']);
+  $post_category_id = escape($row['post_category_id']);
+  $post_status = escape($row['post_status']);
+  $post_image = escape($row['post_image']);
+  $post_tags = escape($row['post_tags']);
+  $post_comment_count = escape($row['post_comment_count']);
+  $post_date = escape($row['post_date']);
+  $post_views_count = escape($row['post_views_count']);
 
 echo "<tr>";
 ?>
@@ -121,8 +121,8 @@ echo "<tr>";
   $select_categories_id = mysqli_query($connection,$query);
 
   while($row = mysqli_fetch_assoc($select_categories_id)) {
-    $cat_id = $row['cat_id'];
-    $cat_title = $row['cat_title'];
+    $cat_id = escape($row['cat_id']);
+    $cat_title = escape($row['cat_title']);
 
     echo "<td>{$cat_title}</td>";
   }
@@ -146,7 +146,7 @@ echo "</tr>";
 
 // Deleting Posts from the View All Posts Table
 if(isset($_GET['delete'])) {
-  $delete_post_id = $_GET['delete'];
+  $delete_post_id = escape($_GET['delete']);
   $query = "DELETE FROM posts WHERE post_id = $delete_post_id";
   $delete_query = mysqli_query($connection, $query);
   header("Location: posts.php");

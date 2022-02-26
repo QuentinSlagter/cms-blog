@@ -16,7 +16,7 @@
 
             // Clicking on Post Title and Opening up the Full Post with catching the ID in the Database
             if(isset($_GET['p_id'])) {
-                $displaying_full_post_with_id = $_GET['p_id'];
+                $displaying_full_post_with_id = escape($_GET['p_id']);
             
             // Adding a view counter on posts
             $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $displaying_full_post_with_id ";
@@ -27,11 +27,11 @@
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)) {
 
-                    $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-                    $post_content = $row['post_content'];
+                    $post_title = escape($row['post_title']);
+                    $post_author = escape($row['post_author']);
+                    $post_date = escape($row['post_date']);
+                    $post_image = escape($row['post_image']);
+                    $post_content = escape($row['post_content']);
 
                     ?>
 
@@ -69,10 +69,10 @@
             
             if(isset($_POST['create_comment'])) {
 
-                $displaying_full_post_with_id = $_GET['p_id'];
-                $comment_author = $_POST['comment_author'];
-                $comment_email = $_POST['comment_email'];
-                $comment_content = $_POST['comment_content'];
+                $displaying_full_post_with_id = escape($_GET['p_id']);
+                $comment_author = escape($_POST['comment_author']);
+                $comment_email = escape($_POST['comment_email']);
+                $comment_content = escape($_POST['comment_content']);
 
                 // Alerting user that fields cannot be blank
                 if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
@@ -124,7 +124,7 @@
                 
                 // Grabbing the ID in the URL
                 if(isset($_GET['p_id'])) {
-                    $p_id = $_GET['p_id'];
+                    $p_id = escape($_GET['p_id']);
                 }
 
                 // Only Show Comments that have been Approved

@@ -18,7 +18,7 @@
             $per_page = 5;
 
             if(isset($_GET['page'])) {
-                $page =$_GET['page'];
+                $page = escape($_GET['page']);
             } else {
                 $page = "";
             }
@@ -42,13 +42,13 @@
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)) {
 
-                    $post_id = $row['post_id'];
-                    $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-                    $post_content = substr($row['post_content'],0,100);
-                    $post_status = $row['post_status'];
+                    $post_id = escape($row['post_id']);
+                    $post_title = escape($row['post_title']);
+                    $post_author = escape($row['post_author']);
+                    $post_date = escape($row['post_date']);
+                    $post_image = escape($row['post_image']);
+                    $post_content = escape(substr($row['post_content'],0,100));
+                    $post_status = escape($row['post_status']);
 
                     // Displaying only Posts that have been Published
                     if($post_status == 'published') {

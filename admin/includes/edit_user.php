@@ -1,31 +1,31 @@
 <?php 
 
 if(isset($_GET['edit_user'])) {
-  $edit_user_id = $_GET['edit_user'];
+  $edit_user_id = escape($_GET['edit_user']);
 
 // Selecting Individual Users from the Database
 $query = "SELECT * FROM users WHERE user_id = $edit_user_id " ;
 $select_users_query = mysqli_query($connection,$query);
 
 while($row = mysqli_fetch_assoc($select_users_query)) {
-  $user_id = $row['user_id'];
-  $user_username = $row['user_username'];
-  $user_password = $row['user_password'];
-  $user_firstName = $row['user_firstName'];
-  $user_lastName = $row['user_lastName'];
-  $user_email = $row['user_email'];
-  $user_image = $row['user_image'];
-  $user_role = $row['user_role'];
+  $user_id = escape($row['user_id']);
+  $user_username = escape($row['user_username']);
+  $user_password = escape($row['user_password']);
+  $user_firstName = escape($row['user_firstName']);
+  $user_lastName = escape($row['user_lastName']);
+  $user_email = escape($row['user_email']);
+  $user_image = escape($row['user_image']);
+  $user_role = escape($row['user_role']);
   }
 }
 
 if(isset($_POST['update_user'])) {
-  $user_username = $_POST['user_username'];
-  $user_password = $_POST['user_password'];
-  $user_firstName = $_POST['user_firstName'];
-  $user_lastName = $_POST['user_lastName'];
-  $user_email = $_POST['user_email'];
-  $user_role = $_POST['user_role'];
+  $user_username = escape($_POST['user_username']);
+  $user_password = escape($_POST['user_password']);
+  $user_firstName = escape($_POST['user_firstName']);
+  $user_lastName = escape($_POST['user_lastName']);
+  $user_email = escape($_POST['user_email']);
+  $user_role = escape($_POST['user_role']);
 
   // Encrypting passwords in the database that are changed in the edit user page and showing the password before being encrypted in the password field on that edit user page
   $query = "SELECT randSalt FROM users";
@@ -35,7 +35,7 @@ if(isset($_POST['update_user'])) {
   }
 
   $row = mysqli_fetch_array($select_randsalt_query);
-  $salt = $row['randSalt'];
+  $salt = escape($row['randSalt']);
   $hashed_password = crypt($user_password, $salt);
   
   // Sending Updated User Information into the Database

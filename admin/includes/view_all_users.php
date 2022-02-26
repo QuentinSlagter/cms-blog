@@ -18,14 +18,14 @@ $query = "SELECT * FROM users" ;
 $select_users = mysqli_query($connection,$query);
 
 while($row = mysqli_fetch_assoc($select_users)) {
-  $user_id = $row['user_id'];
-  $user_username = $row['user_username'];
-  $user_password = $row['user_password'];
-  $user_firstName = $row['user_firstName'];
-  $user_lastName = $row['user_lastName'];
-  $user_email = $row['user_email'];
-  $user_image = $row['user_image'];
-  $user_role = $row['user_role'];
+  $user_id = escape($row['user_id']);
+  $user_username = escape($row['user_username']);
+  $user_password = escape($row['user_password']);
+  $user_firstName = escape($row['user_firstName']);
+  $user_lastName = escape($row['user_lastName']);
+  $user_email = escape($row['user_email']);
+  $user_image = escape($row['user_image']);
+  $user_role = escape($row['user_role']);
 
 
 echo "<tr>";
@@ -61,7 +61,7 @@ echo "</tr>";
 
 // Change the Role of the User to Admin
 if(isset($_GET['change_to_admin'])) {
-  $user_id = $_GET['change_to_admin'];
+  $user_id = escape($_GET['change_to_admin']);
   $query = "UPDATE users SET user_role = 'admin' WHERE user_id = $user_id ";
   $change_admin_query = mysqli_query($connection, $query);
   header("Location: users.php");
@@ -69,7 +69,7 @@ if(isset($_GET['change_to_admin'])) {
 
 // Change the Role of the User to Subscriber
 if(isset($_GET['change_to_subscriber'])) {
-  $user_id = $_GET['change_to_subscriber'];
+  $user_id = escape($_GET['change_to_subscriber']);
   $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = $user_id ";
   $change_subscriber_query = mysqli_query($connection, $query);
   header("Location: users.php");
@@ -77,10 +77,14 @@ if(isset($_GET['change_to_subscriber'])) {
 
 // Deleting Users from the View All Users Table
 if(isset($_GET['delete'])) {
-  $delete_user_id = $_GET['delete'];
+  if(isset($_SESSION['user_role'])) {
+    if($_SESSION['user_role'] == 'admin') {
+  $delete_user_id = escape($_GET['delete']);
   $query = "DELETE FROM users WHERE user_id = $delete_user_id";
   $delete_query = mysqli_query($connection, $query);
   header("Location: users.php");
+    }
+  }
 }
 
 ?>

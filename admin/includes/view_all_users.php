@@ -18,14 +18,14 @@ $query = "SELECT * FROM users" ;
 $select_users = mysqli_query($connection,$query);
 
 while($row = mysqli_fetch_assoc($select_users)) {
-  $user_id = escape($row['user_id']);
-  $user_username = escape($row['user_username']);
-  $user_password = escape($row['user_password']);
-  $user_firstName = escape($row['user_firstName']);
-  $user_lastName = escape($row['user_lastName']);
-  $user_email = escape($row['user_email']);
-  $user_image = escape($row['user_image']);
-  $user_role = escape($row['user_role']);
+  $user_id = $row['user_id'];
+  $user_username = $row['user_username'];
+  $user_password = $row['user_password'];
+  $user_firstName = $row['user_firstName'];
+  $user_lastName = $row['user_lastName'];
+  $user_email = $row['user_email'];
+  $user_image = $row['user_image'];
+  $user_role = $row['user_role'];
 
 
 echo "<tr>";

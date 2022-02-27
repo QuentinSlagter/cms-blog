@@ -13,14 +13,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">
-                            Welcome to Admin
-                            <small><?php echo $_SESSION['username'] ?></small>
+                            Profile 
                         </h1>
 
                         <?php 
   
                         if(isset($_SESSION['username'])) {
-                          $username = escape($_SESSION['username']);
+                          $username = $_SESSION['username'];
 
                           $query = "SELECT * FROM users WHERE user_username = '{$username}' ";
                           $select_user_profile_query = mysqli_query($connection, $query);
@@ -30,13 +29,12 @@
 
                           while($row = mysqli_fetch_array($select_user_profile_query)) {
                             // $user_id = $row['user_id'];
-                            $user_username = escape($row['user_username']);
-                            $user_password = escape($row['user_password']);
-                            $user_firstName = escape($row['user_firstName']);
-                            $user_lastName = escape($row['user_lastName']);
-                            $user_email = escape($row['user_email']);
+                            $user_username = $row['user_username'];
+                            $user_password = $row['user_password'];
+                            $user_firstName = $row['user_firstName'];
+                            $user_lastName = $row['user_lastName'];
+                            $user_email = $row['user_email'];
                             // $user_image = $row['user_image'];
-                            $user_role = escape($row['user_role']);
                           }
                         }
                         
@@ -50,10 +48,9 @@
                           $user_firstName = escape($_POST['user_firstName']);
                           $user_lastName = escape($_POST['user_lastName']);
                           $user_email = escape($_POST['user_email']);
-                          $user_role = escape($_POST['user_role']);
                           
                           // Sending Updated User Information into the Database
-                          $query = "UPDATE users SET user_username = '{$user_username}', user_password = '{$user_password}', user_firstName = '{$user_firstName}', user_lastName = '{$user_lastName}', user_email = '{$user_email}', user_role = '{$user_role}' WHERE user_username = '{$user_username}' ";
+                          $query = "UPDATE users SET user_username = '{$user_username}', user_password = '{$user_password}', user_firstName = '{$user_firstName}', user_lastName = '{$user_lastName}', user_email = '{$user_email}' WHERE user_username = '{$user_username}' ";
                           
                           $update_profile_query = mysqli_query($connection, $query);
                         
@@ -71,25 +68,6 @@
     <label for="user_lastName">Last Name</label>
     <input class="form-control" type="text" value="<?php echo $user_lastName; ?>" name="user_lastName">
   </div>
-  <label for="user_role">Role</label>
-  <div class="form-group">
-    <select name="user_role" id="">
-
-      <option value="<?php echo $user_role ?>"><?php echo $user_role ?></option>
-      
-      <!-- Changing the Role of the User on the Edit User Page -->
-      <?php 
-      
-      if($user_role == 'admin') {
-        echo "<option value='subscriber'>subscriber</option>";
-      } else {
-        echo "<option value='admin'>admin</option>";
-      }
-
-      ?>
-
-    </select>
-  </div>
   <!-- <div class="form-group">
     <label for="post_image">Post Image</label>
     <input class="form-control" type="file" name="image">
@@ -104,7 +82,7 @@
   </div>
   <div class="form-group">
     <label for="user_password">Password</label>
-    <input class="form-control" type="password" value="<?php echo $user_password; ?>" name="user_password">
+    <input class="form-control" autocomplete="off" type="password" value="" name="user_password">
   </div>
   <div class="form-group">
     <input class="btn btn-primary" type="submit" name="update_user" value="Update Profile">

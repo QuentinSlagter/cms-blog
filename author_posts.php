@@ -25,12 +25,12 @@
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)) {
 
-                    $post_title = escape($row['post_title']);
-                    $post_author = escape($row['post_author']);
-                    $post_date = escape($row['post_date']);
-                    $post_image = escape($row['post_image']);
-                    $post_content = escape($row['post_content']);
-                    $post_status = escape($row['post_status']);
+                    $post_title = $row['post_title'];
+                    $post_author = $row['post_author'];
+                    $post_date = $row['post_date'];
+                    $post_image = $row['post_image'];
+                    $post_content = $row['post_content'];
+                    $post_status = $row['post_status'];
 
                     // Displaying only Posts that have been Published
                     if($post_status == 'published') {

@@ -9,17 +9,17 @@
   $select_posts_by_id = mysqli_query($connection,$query);
 
   while($row = mysqli_fetch_assoc($select_posts_by_id)) {
-    $post_id = escape($row['post_id']);
-    $post_author = escape($row['post_author']);
-    $post_title = escape($row['post_title']);
-    $post_category_id = escape($row['post_category_id']);
-    $post_status = escape($row['post_status']);
-    $post_image = escape($row['post_image']);
-    $post_content = escape($row['post_content']);
-    $post_tags = escape($row['post_tags']);
-    $post_comment_count = escape($row['post_comment_count']);
-    $post_date = escape($row['post_date']);
-    $post_views_count = escape($row['post_views_count']);
+    $post_id = $row['post_id'];
+    $post_author = $row['post_author'];
+    $post_title = $row['post_title'];
+    $post_category_id = $row['post_category_id'];
+    $post_status = $row['post_status'];
+    $post_image = $row['post_image'];
+    $post_content = $row['post_content'];
+    $post_tags = $row['post_tags'];
+    $post_comment_count = $row['post_comment_count'];
+    $post_date = $row['post_date'];
+    $post_views_count = $row['post_views_count'];
   }
 
   if(isset($_POST['update_post'])) {
@@ -40,7 +40,7 @@
       $query = "SELECT * FROM posts WHERE post_id = $editing_post_id";
       $select_image = mysqli_query($connection,$query);
       while($row = mysqli_fetch_array($select_image)) {
-        $post_image = escape($row['post_image']);
+        $post_image = $row['post_image'];
       }
     }
     
@@ -79,8 +79,8 @@
     confirm_query($select_categories);
 
     while($row = mysqli_fetch_assoc($select_categories)) {
-    $cat_id = escape($row['cat_id']);
-    $cat_title = escape($row['cat_title']);
+    $cat_id = $row['cat_id'];
+    $cat_title = $row['cat_title'];
 
     echo "<option value='{$cat_id}'>{$cat_title}</option>";
     }

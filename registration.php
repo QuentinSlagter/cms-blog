@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
     $select_randsalt_query = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($select_randsalt_query); 
-    $salt = escape($row['randSalt']);
+    $salt = $row['randSalt'];
 
     $password = crypt($password, $salt);
 

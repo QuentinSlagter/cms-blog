@@ -1,10 +1,35 @@
 <?php 
 
-// Cleaning up data so hackers cannot delete or modify any data
-// function escape($string) {
-//   global $connection;
-//   return mysqli_real_escape_string($connection, trim($string));
-// }
+// Grabbing the number of users online from the database
+function users_online() {
+  
+  if(isset($_GET['onlineusers'])) {
+    global $connection;
+    if(!$connection) {
+      session_start();
+      include("../includes/db.php");
+
+    $session = session_id();
+    $time = time();
+    $time_out_in_seconds = 30;
+    $time_out = $time - $time_out_in_seconds;
+
+    $query = "SELECT * FROM users_online WHERE session = '$session'";
+    $send_query = mysqli_query($connection,$query);
+    $count = mysqli_num_rows($send_query);
+
+    if($count == NULL) {
+        mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES ('$session','$time')");
+    } else {
+        mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+    }
+
+    $users_online_query = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out'");
+    echo $count_user = mysqli_num_rows($users_online_query);
+    }
+  }
+}
+users_online();
 
 function confirm_query($result) {
   global $connection;
@@ -41,8 +66,8 @@ function find_all_categories() {
     $select_all_categories = mysqli_query($connection,$query);
 
     while($row = mysqli_fetch_assoc($select_all_categories)) {
-    $cat_id = escape($row['cat_id']);
-    $cat_title = escape($row['cat_title']);
+    $cat_id = $row['cat_id'];
+    $cat_title = $row['cat_title'];
 
     echo "<tr>";
     echo "<td>{$cat_id}</td>";

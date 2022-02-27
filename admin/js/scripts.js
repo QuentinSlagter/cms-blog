@@ -23,3 +23,13 @@ $(document).ready(function() {
     $(this).remove();
   });
 });
+
+// Updates the number of users online every 0.5sec
+function loadUsersOnline() {
+  $.get("functions.php?onlineusers=result", function(data) {
+    $(".usersOnline").text(data);
+  });
+}
+setInterval(function() {
+  loadUsersOnline();
+},500);

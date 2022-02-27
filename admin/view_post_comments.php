@@ -69,10 +69,10 @@ echo "<tr>";
   }
 
   echo "<td>$comment_date</td>";
-  echo "<td><a href='comments.php?approved={$comment_id}'>Approve</a></td>";
-  echo "<td><a href='comments.php?unapproved={$comment_id}'>Unapprove</a></td>";
+  echo "<td><a href='view_post_comments.php?approved={$comment_id}&id=" . escape($_GET['id']) ."'>Approve</a></td>";
+  echo "<td><a href='view_post_comments.php?unapproved={$comment_id}&id=" . escape($_GET['id']) ."'>Unapprove</a></td>";
   // Javascript confirmation popup asking user if they are sure they want to delete the item
-  echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='comments.php?delete={$comment_id}'>Delete</a></td>";
+  echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='view_post_comments.php?delete={$comment_id}&id=" . escape($_GET['id']) ."'>Delete</a></td>";
 echo "</tr>";
 }
 
@@ -85,7 +85,7 @@ if(isset($_GET['approved'])) {
   $approve_comment_id = escape($_GET['approved']);
   $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $approve_comment_id ";
   $approve_query = mysqli_query($connection, $query);
-  header("Location: comments.php");
+  header("Location: view_post_comments.php?id=" . escape($_GET['id']). "");
 }
 
 // Unapproving Comments added to a Post
@@ -93,7 +93,7 @@ if(isset($_GET['unapproved'])) {
   $unapprove_comment_id = escape($_GET['unapproved']);
   $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $unapprove_comment_id ";
   $unapprove_query = mysqli_query($connection, $query);
-  header("Location: comments.php");
+  header("Location: view_post_comments.php?id=" . escape($_GET['id']). "");
 }
 
 // Deleting Comments from the View All Comments Table
@@ -101,7 +101,7 @@ if(isset($_GET['delete'])) {
   $delete_comment_id = escape($_GET['delete']);
   $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id";
   $delete_query = mysqli_query($connection, $query);
-  header("Location: comments.php");
+  header("Location: view_post_comments.php?id=" . escape($_GET['id']). "");
 }
 
 ?>

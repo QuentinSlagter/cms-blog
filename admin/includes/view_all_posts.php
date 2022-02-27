@@ -1,5 +1,7 @@
 <?php 
 
+include("delete_modal.php");
+
 if(isset($_POST['checkBoxArray'])) {
   foreach($_POST['checkBoxArray'] as $postValueId) {
     $bulk_options = escape($_POST['bulk_options']);
@@ -145,7 +147,8 @@ echo "<tr>";
   echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
   echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
   // Javascript confirmation popup asking user if they are sure they want to delete the item
-  echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='posts.php?delete={$post_id}'>Delete</a></td>";
+  echo "<td><a rel='$post_id' href='javascript:void(0)' class='delete_link'>Delete</a></td>";
+  // echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='posts.php?delete={$post_id}'>Delete</a></td>";
 echo "</tr>";
 }
 
@@ -170,3 +173,16 @@ if(isset($_GET['delete'])) {
 </table>
 
 </form>
+
+<script>
+
+  $(document).ready(function() {
+    $(".delete_link").on('click', function() {
+      const id = $(this).attr("rel");
+      const delete_url = "posts.php?delete=" + id + "";
+      $(".modal_delete_link").attr("href", delete_url);
+      $("#myModal").modal('show');
+    });
+  });
+
+</script>

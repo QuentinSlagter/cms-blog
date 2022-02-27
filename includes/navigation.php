@@ -27,10 +27,13 @@
                 
                 ?>
                     <li>
-                        <a href="/admin/admin_index.php">Admin</a>
+                        <a href="../registration.php">Registration</a>
                     </li>
                     <li>
-                        <a href="../registration.php">Registration</a>
+                        <a href="../contact.php">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/admin/admin_index.php">Admin</a>
                     </li>
         
                 <?php 

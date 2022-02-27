@@ -50,6 +50,9 @@ if(!isset($_SESSION['user_role'])) {
 
     <link rel="stylesheet" href="/admin/css/summernote.css">
 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
 </head>
 
 <body>

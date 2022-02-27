@@ -58,15 +58,15 @@ if(isset($_POST['submit'])) {
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <h6 class="text-center"><?php echo $message; ?></h6>
                         <div class="form-group">
-                            <label for="username" class="sr-only">username</label>
+                            <label for="username">Username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
                         </div>
                          <div class="form-group">
-                            <label for="email" class="sr-only">Email</label>
+                            <label for="email">Email</label>
                             <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
                         </div>
                          <div class="form-group">
-                            <label for="password" class="sr-only">Password</label>
+                            <label for="password">Password</label>
                             <input type="password" name="password" id="key" class="form-control" placeholder="Password">
                         </div>
                 

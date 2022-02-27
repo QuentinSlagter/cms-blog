@@ -84,7 +84,7 @@
                         die('QUERY FAILED' . mysqli_error($connection));
                     }
 
-                $update_comment_count = mysqli_query($connection, $query);
+                // $update_comment_count = mysqli_query($connection, $query);
                     } else {
                         echo "<script>alert('Fields cannot be empty')</script>";
                     }

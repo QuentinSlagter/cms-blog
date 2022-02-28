@@ -73,19 +73,19 @@ if(isset($_POST['checkBoxArray'])) {
   <thead>
     <tr>
       <th><input id="selectAllBoxes" type="checkbox"></th>
-      <th>ID</th>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Category</th>
-      <th>Status</th>
-      <th>Image</th>
-      <th>Tags</th>
-      <th>Views</th>
-      <th>Comments</th>
-      <th>Date</th>
-      <th>Link</th>
-      <th>Edit</th>
-      <th>Delete</th>
+      <th class='text-center'>ID</th>
+      <th class='text-center'>Author</th>
+      <th class='text-center'>Title</th>
+      <th class='text-center'>Category</th>
+      <th class='text-center'>Status</th>
+      <th class='text-center'>Image</th>
+      <th class='text-center'>Tags</th>
+      <th class='text-center'>Views</th>
+      <th class='text-center'>Comments</th>
+      <th class='text-center'>Date</th>
+      <th class='text-center'>Link</th>
+      <th class='text-center'>Edit</th>
+      <th class='text-center'>Delete</th>
     </tr>
   </thead>
 <tbody>
@@ -114,9 +114,9 @@ echo "<tr>";
 <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
 
 <?php
-  echo "<td>$post_id</td>";
-  echo "<td>$post_author</td>";
-  echo "<td>$post_title</td>";
+  echo "<td class='text-center'>$post_id</td>";
+  echo "<td class='text-center'>$post_author</td>";
+  echo "<td class='text-center'>$post_title</td>";
   
   // Changing the Category ID to Display the Category Title
   $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
@@ -126,13 +126,13 @@ echo "<tr>";
     $cat_id = $row['cat_id'];
     $cat_title = $row['cat_title'];
 
-    echo "<td>{$cat_title}</td>";
+    echo "<td class='text-center'>{$cat_title}</td>";
   }
   
-  echo "<td>$post_status</td>";
-  echo "<td><img class='img-responsive' width='100' src='../images/$post_image' alt='image'>$post_image</td>";
-  echo "<td>$post_tags</td>";
-  echo "<td>$post_views_count</td>";
+  echo "<td class='text-center'>$post_status</td>";
+  echo "<td class='text-center'><img class='img-responsive' width='100' src='../images/$post_image' alt='image'></td>";
+  echo "<td class='text-center'>$post_tags</td>";
+  echo "<td class='text-center'>$post_views_count</td>";
 
   // Counting the number of comments on each post
   $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
@@ -142,12 +142,12 @@ echo "<tr>";
   $comment_id = $row['comment_id'];
   $count_comments = mysqli_num_rows($send_comment_query);
 
-  echo "<td><a href='/admin/view_post_comments.php?id=$post_id'>$count_comments</a></td>";
-  echo "<td>$post_date</td>";
-  echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
-  echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
+  echo "<td class='text-center'><a href='/admin/view_post_comments.php?id=$post_id'>$count_comments</a></td>";
+  echo "<td class='text-center'>$post_date</td>";
+  echo "<td class='text-center'><a class='btn btn-primary' href='../post.php?p_id={$post_id}'>View Post</a></td>";
+  echo "<td class='text-center'><a class='btn btn-info' href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
   // Javascript confirmation popup asking user if they are sure they want to delete the item
-  echo "<td><a rel='$post_id' href='javascript:void(0)' class='delete_link'>Delete</a></td>";
+  echo "<td class='text-center'><a class='btn btn-danger' rel='$post_id' href='javascript:void(0)' class='delete_link'>Delete</a></td>";
   // echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='posts.php?delete={$post_id}'>Delete</a></td>";
 echo "</tr>";
 }

@@ -70,11 +70,11 @@ function find_all_categories() {
     $cat_title = $row['cat_title'];
 
     echo "<tr>";
-    echo "<td>{$cat_id}</td>";
-    echo "<td>{$cat_title}</td>";
+    echo "<td class='text-center'>{$cat_id}</td>";
+    echo "<td class='text-center'>{$cat_title}</td>";
     // Javascript confirmation popup asking user if they are sure they want to delete the item
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='admin_categories.php?delete={$cat_id}'>Delete</a></td>";
-    echo "<td><a href='admin_categories.php?edit={$cat_id}'>Edit</a></td>";
+    echo "<td class='text-center'><a class='btn btn-info' href='admin_categories.php?edit={$cat_id}'>Edit</a></td>";
+    echo "<td class='text-center'><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='admin_categories.php?delete={$cat_id}'>Delete</a></td>";
     echo "</tr>";
     }
 }
@@ -87,6 +87,34 @@ function delete_categories() {
 
     $delete_query = mysqli_query($connection,$query);
     header("location: admin_categories.php");
+  }
+}
+
+function username_exists($username) {
+  global $connection;
+
+  $query = "SELECT user_username FROM users WHERE user_username = '$username'";
+  $results = mysqli_query($connection,$query);
+  confirm_query($results);
+
+  if(mysqli_num_rows($results) > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function email_exists($email) {
+  global $connection;
+
+  $query = "SELECT user_email FROM users WHERE user_email = '$email'";
+  $results = mysqli_query($connection,$query);
+  confirm_query($results);
+
+  if(mysqli_num_rows($results) > 0) {
+    return true;
+  } else {
+    return false;
   }
 }
 

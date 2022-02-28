@@ -33,7 +33,7 @@
                         <a href="admin_index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-book"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="posts_dropdown" class="collapse">
                             <li>
                                 <a href="posts.php">View Posts</a>
@@ -43,25 +43,42 @@
                             </li>
                         </ul>
                     </li>
+                    <!-- Only Admins with full priviledges have access to categories. Categories will not display for regular authors -->
+                    <?php 
+                    if(isset($_SESSION['user_role'])) {
+                        if($_SESSION['user_role'] == 'admin') {
+                    
+                    echo "
                     <li>
-                        <a href="/admin/admin_categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
+                        <a href='/admin/admin_categories.php'><i class='fa fa-fw fa-folder'></i> Categories</a>
                     </li>
+                    
+                    "; 
+                    } } ?>
                     <li class="">
-                        <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
+                        <a href="comments.php"><i class="fa fa-fw fa-comment"></i> Comments</a>
                     </li>
+                    <!-- Only Admins with full priviledges have access to users. Users will not display for regular authors -->
+                    <?php 
+                    if(isset($_SESSION['user_role'])) {
+                        if($_SESSION['user_role'] == 'admin') {
+                    
+                    echo "
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <a href='javascript:;' data-toggle='collapse' data-target='#demo'><i class='fa fa-fw fa-users'></i> Users <i class='fa fa-fw fa-caret-down'></i></a>
+                        <ul id='demo' class='collapse'>
                             <li>
-                                <a href="users.php">View All Users</a>
+                                <a href='users.php'>View All Users</a>
                             </li>
                             <li>
-                                <a href="users.php?source=add_user">Add User</a>
+                                <a href='users.php?source=add_user'>Add User</a>
                             </li>
                         </ul>
                     </li>
+                    ";
+                    } } ?>
                     <li>
-                        <a href="profile.php"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
+                        <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                 </ul>
             </div>

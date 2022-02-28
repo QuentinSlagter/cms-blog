@@ -1,5 +1,6 @@
 <?php  include "includes/header.php"; ?>
 <?php  include "includes/db.php"; ?>
+<?php  include "admin/functions.php"; ?>
 
 <?php 
 
@@ -8,12 +9,38 @@ if(isset($_POST['submit'])) {
     $email = escape($_POST['email']);
     $password = escape($_POST['password']);
 
-    // Alerting user that fields cannot be blank
-    if(!empty($username) && !empty($email) && !empty($password)) {
+    $error = [
+        'username' == '',
+        'email' == '',
+        'password' == ''
+    ];
 
-    $username = mysqli_real_escape_string($connection, $username);
-    $email = mysqli_real_escape_string($connection, $email);
-    $password = mysqli_real_escape_string($connection, $password);
+    if(empty($username)) {
+        $error['username'] = "<p class='bg-danger'>Username cannot be empty</p>";
+    }
+
+    if(username_exists($username)) {
+        $error['username'] = "<p class ='bg-warning'>Username already exists. Please try again with a different username!<?p>";
+    }
+
+    if(empty($email)) {
+        $error['email'] = "<p class='bg-danger'>Email cannot be empty</p>";
+    }
+
+    if(email_exists($email)) {
+        $error['email'] = "<p class ='bg-warning'>Email is already being used. Please try again with a different email!<?p>";
+    }
+
+    if(empty($password)) {
+        $error['password'] = "<p class='bg-danger'>Password cannot be empty</p>";
+    }
+
+    // Alerting user that fields cannot be blank
+    elseif(!empty($username) && !empty($email) && !empty($password)) {
+
+    // $username = mysqli_real_escape_string($connection, $username);
+    // $email = mysqli_real_escape_string($connection, $email);
+    // $password = mysqli_real_escape_string($connection, $password);
 
     // Encrypting passwords to stop hackers
     $query = "SELECT randSalt FROM users";
@@ -32,10 +59,12 @@ if(isset($_POST['submit'])) {
     // confirm_query($registration_user_query);
 
     // Give the user a success or failure message
-    $message = "<p class='bg-success'>Form Submitted! If approved by admin, you will gain access to add your own posts</p>";
-    } else {
-        $message = "<p class='bg-danger'>Fields cannot be empty</p>";
-    }
+    $message = "<h4 class='bg-success text-center'>Form Submitted! If approved by admin, you will gain access as an author!</h4>";
+    } 
+    
+    // else {
+    //     $message = "<p class='bg-danger'>Fields cannot be empty</p>";
+    // }
 }
 
 
@@ -59,15 +88,18 @@ if(isset($_POST['submit'])) {
                         <h6 class="text-center"><?php echo $message; ?></h6>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username" autocomplete="on" value="<?php echo isset($username) ? $username : '' ?>">
+                            <p><?php echo isset($error['username']) ? $error['username'] : '' ?></p>
                         </div>
                          <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email" autocomplete="on" value="<?php echo isset($email) ? $email : '' ?>">
+                            <p><?php echo isset($error['email']) ? $error['email'] : '' ?></p>
                         </div>
                          <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                            <input type="password" name="password" id="key" class="form-control" placeholder="Enter your Password">
+                            <p><?php echo isset($error['password']) ? $error['password'] : '' ?></p>
                         </div>
                 
                         <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">

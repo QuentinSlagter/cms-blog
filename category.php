@@ -33,7 +33,7 @@
                     $post_content = substr($row['post_content'],0,100);
                     $post_status = $row['post_status'];
 
-                // Displaying only Posts that have been Published
+                    // Displaying only Posts that have been Published
                     if($post_status == 'published') {
                     
                     

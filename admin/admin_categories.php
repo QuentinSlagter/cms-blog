@@ -49,8 +49,10 @@
                           <table class="table table-bordered table-hover">
                             <thead>
                               <tr>
-                                <th>Id</th>
-                                <th>Category Title</th>
+                                <th class='text-center'>Id</th>
+                                <th class='text-center'>Category Title</th>
+                                <th class='text-center'>Edit</th>
+                                <th class='text-center'>Delete</th>
                               </tr>
                             </thead>
                             <tbody>

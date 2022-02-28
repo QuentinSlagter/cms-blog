@@ -1,12 +1,16 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Username</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Role</th>
+      <th class='text-center'>ID</th>
+      <th class='text-center'>Username</th>
+      <th class='text-center'>First Name</th>
+      <th class='text-center'>Last Name</th>
+      <th class='text-center'>Email</th>
+      <th class='text-center'>Role</th>
+      <th class='text-center'>Admin</th>
+      <th class='text-center'>Subscriber</th>
+      <th class='text-center'>Edit</th>
+      <th class='text-center'>Delete</th>
     </tr>
   </thead>
 <tbody>
@@ -29,10 +33,10 @@ while($row = mysqli_fetch_assoc($select_users)) {
 
 
 echo "<tr>";
-  echo "<td>$user_id</td>";
-  echo "<td>$user_username</td>";
-  echo "<td>$user_firstName</td>";
-  echo "<td>$user_lastName</td>";
+  echo "<td class='text-center'>$user_id</td>";
+  echo "<td class='text-center'>$user_username</td>";
+  echo "<td class='text-center'>$user_firstName</td>";
+  echo "<td class='text-center'>$user_lastName</td>";
   
   // Creating a Link to take you to the Post where the Comment was made
   // $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
@@ -45,13 +49,13 @@ echo "<tr>";
   //   echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
   // }
 
-  echo "<td>$user_email</td>";
-  echo "<td>$user_role</td>";
-  echo "<td><a href='users.php?change_to_admin={$user_id}'>Admin</a></td>";
-  echo "<td><a href='users.php?change_to_subscriber={$user_id}'>Subscriber</a></td>";
-  echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
+  echo "<td class='text-center'>$user_email</td>";
+  echo "<td class='text-center'>$user_role</td>";
+  echo "<td class='text-center'><a class='btn btn-primary' href='users.php?change_to_admin={$user_id}'>Admin</a></td>";
+  echo "<td class='text-center'><a class='btn btn-warning' href='users.php?change_to_subscriber={$user_id}'>Subscriber</a></td>";
+  echo "<td class='text-center'><a class='btn btn-info' href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
   // Javascript confirmation popup asking user if they are sure they want to delete the item
-  echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='users.php?delete={$user_id}'>Delete</a></td>";
+  echo "<td class='text-center'><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='users.php?delete={$user_id}'>Delete</a></td>";
 echo "</tr>";
 }
 

@@ -28,13 +28,16 @@
             } else {
                 $page_1 = ($page * $per_page) - $per_page;
             }
-            
+
             $post_query_count = "SELECT * FROM posts";
             $find_count = mysqli_query($connection,$post_query_count);
             $count = mysqli_num_rows($find_count);
 
-            $count = ceil($count / $per_page);
+            // if($count < 1) {
+            //     echo "<h1 class='text-center'>No posts have been published.</h1>";
+            // } else {
 
+            $count = ceil($count / $per_page);
             
             // Displaying All Posts from the Database
             $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
@@ -52,7 +55,6 @@
 
                     // Displaying only Posts that have been Published
                     if($post_status == 'published') {
-                    
                     
                     ?>
 

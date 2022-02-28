@@ -22,19 +22,49 @@
                 while($row = mysqli_fetch_assoc($select_all_categories_query)) {
                     $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
-                    echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                    // echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                    
+                    // Adding an active style to current link
+                    $category_class = '';
+                    $registration_class = '';
+                    $contact_class = '';
+                    
+                    $pageName = basename($_SERVER['PHP_SELF']);
+                    $registration = 'registration.php';
+                    $contact = 'contact.php';
+                    
+                    if(isset($_GET['category']) && $_GET['category'] == $cat_id) {
+                        $category_class = 'active';
+                    } elseif ($pageName == $registration) {
+                        $registration_class = 'active';
+                    } elseif ($pageName == $contact) {
+                        $contact_class = 'active';
+                    }
+                    echo "<li class=$category_class><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
                 }
-                
+                    
                 ?>
-                    <li>
+                    <li class="<?php echo $registration_class; ?>">
                         <a href="../registration.php">Registration</a>
                     </li>
-                    <li>
+                    <li class="<?php echo $contact_class; ?>">
                         <a href="../contact.php">Contact</a>
                     </li>
-                    <li>
-                        <a href="/admin/admin_index.php">Admin</a>
-                    </li>
+                    <!-- <li>
+                        <a href="../login_page.php">Login</a>
+                    </li> -->
+                    <!-- Only allow those who are not logged in will have the login navigation link on the homepage -->
+                    <?php if(isset($_SESSION['user_role']) == "") {
+                        echo "<li><a href='../login_page.php'>Login</a></li>";
+                    } ?>
+                    <!-- Only allow those who are logged in will have the logout navigation link on the homepage -->
+                    <?php if(isset($_SESSION['user_role'])) {
+                        echo "<li><a href='../includes/logout.php'>Logout</a></li>";
+                    } ?>
+                    <!-- Only allow Admins to see the Admin navigation link on the homepage -->
+                    <?php if(isset($_SESSION['user_role'])) {
+                        echo "<li><a href='/admin/admin_index.php'>Admin</a></li>";
+                    } ?>
         
                 <?php 
                 // check the Admin Session Login 

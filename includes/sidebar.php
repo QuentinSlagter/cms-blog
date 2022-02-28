@@ -18,22 +18,36 @@
 
 <!-- Login -->
 <div class="well">
-    <h4>Login</h4>
-    <form action="includes/login.php" method="post">
-    <div class="form-group">
-        <input name="user_username" type="text" class="form-control" placeholder="Enter Username">
+
+    <!-- Allowing Admin to logout on the homepage -->
+    <?php if(isset($_SESSION['user_role'])): ?>
+        <h4 class="text-center">Currently logged in as: </h4>
+        <h1 class="text-center"><?php echo $_SESSION['username'] ?></h1>
+        <div class="text-center">
+        <a href="includes/logout.php" class="btn btn-primary">Logout</a>
+        </div>
+    <?php else: ?>
+        
+        <!-- Normal Login page -->
+        <h4>Login</h4>
+        <form action="includes/login.php" method="post">
+            <div class="form-group">
+                <input name="user_username" type="text" class="form-control" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <input name="user_password" type="password" class="form-control" placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" name="login" type="submit">Login</button>
+                </span>
+            </div>
+        </form>
+        <!-- /.input-group -->
+
+    <?php endif; ?>
     </div>
-    <div class="form-group">
-        <input name="user_password" type="password" class="form-control" placeholder="Enter Password">
-    </div>
-    <div class="form-group">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" name="login" type="submit">Login</button>
-        </span>
-    </div>
-    </form>
-    <!-- /.input-group -->
-</div>
+
 
 <!-- Blog Categories Well -->
 <div class="well">

@@ -5,21 +5,41 @@
 
 if(isset($_POST['submit'])) {
     $to = "slagter.quentin@gmail.com";
-    $header = "From: " .escape($_POST['email']);
+    $email = escape($_POST['email']);
+    $header = "From: " . $email;
     $subject = wordwrap(escape($_POST['subject']),70);
     $messageContent = wordwrap(escape($_POST['messageContent']),70);
 
+    $error = [
+        'header' == '',
+        'subject' == '',
+        'messageContent' == ''
+    ];
+
+    if(empty($email)) {
+        $error['email'] = "<p class='bg-danger'>Email cannot be empty</p>";
+    }
+
+    if(empty($subject)) {
+        $error['subject'] = "<p class='bg-danger'>Subject cannot be empty</p>";
+    }
+
+    if(empty($messageContent)) {
+        $error['messageContent'] = "<p class='bg-danger'>Message cannot be empty</p>";
+    }
+
     // Alerting user that fields cannot be blank
-    if(!empty($header) && !empty($subject) && !empty($messageContent)) {
+    elseif(!empty($header) && !empty($subject) && !empty($messageContent)) {
 
       // send email
       mail($to,$subject,$messageContent, $header);
 
     // Give the user a success or failure message
     $message = "<p class='bg-success'>Form Submitted! If you have any addition concerns or questions, do not hesitate to ask.</p>";
-    } else {
-        $message = "<p class='bg-danger'>Fields cannot be empty</p>";
-    }
+    } 
+    // else {
+    //     $message = "<p class='bg-danger'>Fields cannot be empty</p>";
+    // }
 }
 
 
@@ -43,16 +63,19 @@ if(isset($_POST['submit'])) {
                         <h6 class="text-center"><?php echo $message; ?></h6>
                          <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email" autocomplete="on" value="<?php echo isset($email) ? $email : '' ?>">
+                            <p><?php echo isset($error['email']) ? $error['email'] : '' ?></p>
                         </div>
                          <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter the Subject Title">
+                            <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter the Subject Title" autocomplete="on" value="<?php echo isset($subject) ? $subject : '' ?>">
+                            <p><?php echo isset($error['subject']) ? $error['subject'] : '' ?></p>
                         </div>
                          <div class="form-group">
                             <label for="messageContent">Concerns, or Questions</label>
                             <br>
                             <textarea class="form-control" name="messageContent" id="messageContent" cols="30" rows="10"></textarea>
+                            <p><?php echo isset($error['messageContent']) ? $error['messageContent'] : '' ?></p>
                         </div>
                 
                         <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Submit">

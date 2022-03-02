@@ -2,7 +2,7 @@
 
 <!-- Blog Search Well -->
 <div class="well">
-    <h4>Blog Search</h4>
+    <h4 class="text-center">Blog Search</h4>
     <form action="search.php" method="post">
     <div class="input-group">
         <input name="search" type="text" class="form-control">
@@ -29,7 +29,7 @@
     <?php else: ?>
         
         <!-- Normal Login page -->
-        <h4>Login</h4>
+        <h4 class="text-center">Login</h4>
         <form action="includes/login.php" method="post">
             <div class="form-group">
                 <input name="user_username" type="text" class="form-control" placeholder="Enter Username">
@@ -37,11 +37,14 @@
             <div class="form-group">
                 <input name="user_password" type="password" class="form-control" placeholder="Enter Password">
             </div>
-            <div class="form-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" name="login" type="submit">Login</button>
-                </span>
-            </div>
+                <div class="form-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary form-control" name="login" type="submit">Login</button>
+                    </span>
+                </div>
+                <div class="form-group text-center">
+                    <a href="forgot_password.php?forgot=<?php echo uniqid(true); ?>">Forgot Password</a>
+                </div>
         </form>
         <!-- /.input-group -->
 
@@ -59,7 +62,7 @@
     
     ?>
 
-    <h4>Blog Categories</h4>
+    <h4 class="text-center">Blog Categories</h4>
     <div class="row">
         <div class="col-lg-6">
             <ul class="list-unstyled">

@@ -101,6 +101,10 @@ if(isset($_POST['login'])) {
                                     <input name="login" class="btn btn-lg btn-primary btn-block" value="Login" type="submit">
                                 </div>
 
+                                <div class="form-group">
+                                    <a href="forgot_password.php?forgot=<?php echo uniqid(true); ?>">Forgot Password</a>
+                                </div>
+
 
                             </form>
 

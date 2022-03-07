@@ -4,10 +4,8 @@
 
 <?php 
 
-$_SESSION['username'];
-$_SESSION['firstName'];
-$_SESSION['lastName'];
-$_SESSION['user_role'];
+echo $_SESSION['username'];
+echo $_SESSION['user_role'];
 
 
 ?>

@@ -1,5 +1,16 @@
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
+<?php session_start(); ?>
+
+<?php 
+
+$_SESSION['username'];
+$_SESSION['firstName'];
+$_SESSION['lastName'];
+$_SESSION['user_role'];
+
+
+?>
 
     <!-- Navigation -->
 <?php include "includes/navigation.php"; ?>
@@ -32,10 +43,6 @@
             $post_query_count = "SELECT * FROM posts";
             $find_count = mysqli_query($connection,$post_query_count);
             $count = mysqli_num_rows($find_count);
-
-            // if($count < 1) {
-            //     echo "<h1 class='text-center'>No posts have been published.</h1>";
-            // } else {
 
             $count = ceil($count / $per_page);
             

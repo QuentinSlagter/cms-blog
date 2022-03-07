@@ -4,9 +4,8 @@
 
 <?php 
 
-echo $_SESSION['username'];
-echo $_SESSION['user_role'];
-
+// echo $_SESSION['username'];
+// echo $_SESSION['user_role'];
 
 ?>
 

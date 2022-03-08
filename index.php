@@ -2,13 +2,6 @@
 <?php include "includes/header.php"; ?>
 <?php session_start(); ?>
 
-<?php 
-
-// echo $_SESSION['username'];
-// echo $_SESSION['user_role'];
-
-?>
-
     <!-- Navigation -->
 <?php include "includes/navigation.php"; ?>
 

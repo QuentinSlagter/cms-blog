@@ -76,12 +76,6 @@ if(isset($_POST['login'])) {
                         <h2 class="text-center">Login</h2>
                         <div class="panel-body">
 
-                            <?php 
-
-                            echo $_SESSION['username'];
-                            
-                            ?>
-
                             <form id="login-form" role="form" autocomplete="off" class="form" method="post">
 
                                 <div class="form-group">
